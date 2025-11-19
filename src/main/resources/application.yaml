@@ -36,8 +36,8 @@ spring:
           predicates:
             - Path=/api/pedidos/**
 
-        # RUTA HACIA MS-LOGIN (JWT)
-        - id: ms-login
-          uri: http://localhost:8200   # ← aquí va el puerto donde corre tu proyecto jwt
+        # RUTA HACIA LOGIN (JWT) DENTRO DE MS-USUARIOS (también 8081)
+        - id: ms-usuarios-auth
+          uri: http://localhost:8081
           predicates:
-            - Path=/auth/login
+            - Path=/auth/**
