@@ -6,10 +6,8 @@ spring:
     name: api-gateway
 
   cloud:
-
     compatibility-verifier:
       enabled: false
-
 
     gateway:
       routes:
@@ -31,8 +29,15 @@ spring:
           uri: http://localhost:8083
           predicates:
             - Path=/api/ventas/**
+
         # RUTA HACIA MS-PEDIDOS (puerto 8084)
         - id: ms-pedidos
           uri: http://localhost:8084
           predicates:
             - Path=/api/pedidos/**
+
+        # RUTA HACIA MS-LOGIN (JWT)
+        - id: ms-login
+          uri: http://localhost:8200   # ← aquí va el puerto donde corre tu proyecto jwt
+          predicates:
+            - Path=/auth/login
