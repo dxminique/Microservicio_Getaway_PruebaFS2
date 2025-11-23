@@ -10,34 +10,35 @@ spring:
       enabled: false
 
     gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "http://localhost:5173"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
       routes:
-
-        # RUTA HACIA MS-USUARIOS (puerto 8081)
-        - id: ms-usuarios
-          uri: http://localhost:8081
-          predicates:
-            - Path=/api/usuarios/**
-
-        # RUTA HACIA MS-PRODUCTOS (puerto 8082)
-        - id: ms-productos
-          uri: http://localhost:8082
-          predicates:
-            - Path=/api/productos/**
-
-        # RUTA HACIA MS-VENTAS (puerto 8083)
-        - id: ms-ventas
-          uri: http://localhost:8083
-          predicates:
-            - Path=/api/ventas/**
-
-        # RUTA HACIA MS-PEDIDOS (puerto 8084)
-        - id: ms-pedidos
-          uri: http://localhost:8084
-          predicates:
-            - Path=/api/pedidos/**
-
-        # RUTA HACIA LOGIN (JWT) DENTRO DE MS-USUARIOS (también 8081)
         - id: ms-usuarios-auth
           uri: http://localhost:8081
           predicates:
             - Path=/auth/**
+        - id: ms-usuarios
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/usuarios/**
+        - id: ms-productos
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/productos/**
+        - id: ms-ventas
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/ventas/**
+        - id: ms-pedidos
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/pedidos/**
