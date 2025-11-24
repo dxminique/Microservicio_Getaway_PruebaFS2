@@ -21,8 +21,10 @@ public class SecurityConfig {
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(exchanges -> exchanges
+
                         .pathMatchers("/auth/**").permitAll()
-                        .pathMatchers("/api/usuarios/**").permitAll()
+
+
                         .anyExchange().permitAll()
                 )
                 .build();
@@ -32,11 +34,11 @@ public class SecurityConfig {
     public CorsWebFilter corsWebFilter() {
         CorsConfiguration config = new CorsConfiguration();
 
-        // Para desarrollo: aceptar cualquier origen
+
         config.setAllowedOriginPatterns(List.of("*"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(false); // así es compatible con "*"
+        config.setAllowCredentials(false); //
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
